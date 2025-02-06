@@ -1,4 +1,3 @@
-const transactionModel = require("../models/transactionModel");
 const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require('@google/generative-ai');
 const dotenv = require('dotenv').config()
 
@@ -36,7 +35,8 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
                         "or income or any other related finance data. you only answer finance related"+
                         "questions and friendly tell people that you can not answer any other"+
                         " kind of question other than personal finance politely and don't include any ** in"+
-                        "in the response to make text bold give simple text only"}],
+                        "in the response to make text bold give simple text only"+
+                        "all values are in rupees and there is no transaction in any other currency like dollar etc."}],
             },
             {
                 role: "model",
@@ -50,23 +50,6 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
                 role: "model",
                 parts: [{ text: "Hi there! Thanks for reaching out to us. how can i help you today?"}],
             },
-            // {
-            //     role: "user",
-            //     parts: [{ text: "this is my data about my monthly expense now if i ask any question" +
-            //             "using the keywords i or my data answer question based on this:"+
-            //             "this is my date wise expenditure:" +
-            //             "2023-11-01: $1200 on Rent\n" +
-            //             "2023-11-02: $300 On transportation\n" +
-            //             "2023-11-03: $150 on transportation\n" +
-            //             "2023-11-04: $100 on movie ticket\n" +
-            //             "2023-11-05: $200 food\n" +
-            //             "2023-11-06: $150 shopping\n" +
-            //             "2023-11-07: $250 education\n" +
-            //             "2023-11-08: $400 food\n" +
-            //             "2023-11-09: $80 education\n" +
-            //             "2023-11-10: $70 miscellaneous\n" +
-            //             "2023-11-11: $70 transportation\n" }],
-            // },
             {
                 role: "user",
                 parts: [{ text: memory.toString()}],
