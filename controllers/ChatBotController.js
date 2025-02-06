@@ -30,7 +30,7 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
         history: [
             {
                 role: "user",
-                parts: [{ text: "You are Sam, a friendly financial assistant who responds to" +
+                parts: [{ text: "You are FinBot, a friendly financial assistant who responds to" +
                         "peoples questions related personal finance based on provided expenditure" +
                         "or income or any other related finance data. you only answer finance related"+
                         "questions and friendly tell people that you can not answer any other"+
@@ -52,10 +52,6 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
             },
             {
                 role: "user",
-                parts: [{ text: memory.toString()}],
-            },
-            {
-                role: "user",
                 parts: [{ text: "this is all the info about the user. analyse this info and"+
                         " answer any questions they ask based on this"},{text: JSON.stringify(userDetails,null,2)},],
             },
@@ -68,7 +64,11 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
                 role: "user",
                 parts: [{ text: "this is the day-wise expense and income info about the user. analyse this info and"+
                         " answer any questions they ask based on this"},{text: JSON.stringify(DayWiseData)},],
-            }
+            },
+            {
+                role: "user",
+                parts: [{ text: memory.toString()}],
+            },
         ],
     });
 
