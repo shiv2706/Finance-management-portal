@@ -76,7 +76,8 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
     const response = result.response;
     return response.text();
 }
-let historyy = "this is the history of all the previous questions ans answers asked till now:";
+let historyy = "this is the history of all the previous questions ans answers asked till now if"+
+    "if the user asks any follow-up questions use this chat history as context to answer that follow-up question:";
 let count = 0;
 
 const ChatBotResponse = async (req, res) => {
