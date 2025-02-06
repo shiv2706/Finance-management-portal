@@ -38,6 +38,10 @@ const registerController = async (req, res) => {
     }
 }
 
+const ReturnOkay = async (req, res) => {
+    res.status(200).send("okay")
+}
 
 
-module.exports = {loginController, registerController}
+
+module.exports = {loginController, registerController,ReturnOkay}
