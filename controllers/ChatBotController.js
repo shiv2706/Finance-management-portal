@@ -83,7 +83,7 @@ let count = 0;
 const ChatBotResponse = async (req, res) => {
     try{
         const {userInput,userInfo, CategoryWiseExpense,DayWiseData} = req.body;
-        let context = JSON.stringify(userInfo);
+        let context = JSON.stringify(userInfo,CategoryWiseExpense,DayWiseData);
         // context = context + "hello"
         console.log(context)
         const response = await runChat(userInput,historyy,userInfo,CategoryWiseExpense,DayWiseData);
