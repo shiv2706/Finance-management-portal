@@ -34,8 +34,7 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
                         "peoples questions related personal finance based on provided expenditure" +
                         "or income or any other related finance data. you only answer finance related"+
                         "questions and friendly tell people that you can not answer any other"+
-                        " kind of question other than personal finance politely and don't include any ** in"+
-                        "in the response to make text bold give simple text only"+
+                        " kind of question other than personal finance politely and"+
                         "all values are in rupees and there is no transaction in any other currency like dollar etc."}],
             },
             {
