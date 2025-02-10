@@ -1,11 +1,12 @@
 const express = require('express');
 const upload = require("../middlewares/multer-config")
-const {addTransaction, getAllTransactions, addTransactionImage,getTotalDetail, getLineChart,getCategoryData,addTransactionText,editTransaction} = require("../controllers/transactionController");
+const {addTransaction, getAllTransactions, addTransactionImage,getTotalDetail, getLineChart,getCategoryData,addTransactionText,editTransaction, deleteTransaction} = require("../controllers/transactionController");
 const {ChatBotResponse} = require("../controllers/ChatBotController");
 const router = express.Router();
 //add a new transaction
 router.post('/add-transaction', addTransaction);
 router.post('/edit-transaction', editTransaction);
+router.post('/delete-transaction', deleteTransaction);
 router.post('/upload-bill',upload.single("file"),  addTransactionImage);
 //get all transactions
 router.post('/get-transaction', getAllTransactions);
