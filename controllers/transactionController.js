@@ -253,6 +253,18 @@ const addTransactionText = async (req, res) => {
     }
 }
 
+const editTransaction = async (req, res) => {
+    try{
+        await transactionModel.findOneAndUpdate({_id:req.body.transactionId}, req.body.payload )
+        res.status(200).json("transaction updated")
+
+    }catch(err){
+        console.log(err);
+        return res.status(500).json({err})
+    }
+
+}
+
 const getLineChart = async (req, res) => {
     try{
         const { daterange } = req.body;
@@ -349,4 +361,4 @@ const getCategoryData = async (req, res) => {
 
 
 
-module.exports = {getAllTransactions, addTransaction, addTransactionImage,getTotalDetail,getLineChart, getCategoryData, addTransactionText}
+module.exports = {getAllTransactions, addTransaction, addTransactionImage,getTotalDetail,getLineChart, getCategoryData, addTransactionText, editTransaction}
