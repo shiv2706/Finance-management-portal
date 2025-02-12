@@ -181,7 +181,7 @@ const getTotalDetail = async (req, res) => {
                 $gte: DaysAgo,
 
             },
-            userid:req.body.userid,}).select('amount Type category date -_id -createdAt -updatedAt -userid')
+            userid:req.body.userid,})
 
         let totalIncome = 0;
         let totalExpense = 0;
