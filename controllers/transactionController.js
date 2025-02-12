@@ -181,7 +181,7 @@ const getTotalDetail = async (req, res) => {
                 $gte: DaysAgo,
 
             },
-            userid:req.body.userid,})
+            userid:req.body.userid,}).select('amount Type category date -_id -createdAt -updatedAt -userid')
 
         let totalIncome = 0;
         let totalExpense = 0;
@@ -267,7 +267,7 @@ const editTransaction = async (req, res) => {
 
 const deleteTransaction = async (req, res) => {
     try {
-        await transactionModel.findOneAndDelete({_id:req.body.transactionId})
+        await transactionModel.findOneAndDelete({_id: req.body.transactionId})
         res.status(200).json("transaction deleted")
     }catch(err){
         console.log(err);
