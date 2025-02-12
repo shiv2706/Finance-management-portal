@@ -88,7 +88,7 @@ const ChatBotResponse = async (req, res) => {
         const response = await runChat(userInput,historyy,userInfo,CategoryWiseExpense,DayWiseData);
         console.log("runchat invoked")
         count++;
-        // historyy = historyy + `${count}`+ ":" + "Question: "+  userInput + ". response: "+ response;
+        historyy = historyy + `${count}`+ ":" + "Question: "+  userInput + ". response: "+ response;
         console.log(historyy)
         return res.status(200).send(response);
 
