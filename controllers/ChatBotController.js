@@ -51,7 +51,10 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
             },
             {
                 role: "user",
-                parts: [{ text: "this is all the info about the user. analyse this info and"+
+                parts: [{ text: "this is all the info about the user. It includes all the transactions"+
+                        "that the user has made in the transactions array which has all the transactions"+
+                        "as different objects with amount,Type,category and date fields. this also includes the various"+
+                        "Total values aswell analyse this info and"+
                         " answer any questions they ask based on this"},{text: JSON.stringify(userDetails,null,2)},],
             },
             {
@@ -62,7 +65,8 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
             {
                 role: "user",
                 parts: [{ text: "this is the day-wise expense and income info about the user. analyse this info and"+
-                        " answer any questions they ask based on this"},{text: JSON.stringify(DayWiseData)},],
+                        " answer any questions they ask based on this the label array are the dates"+
+                        "and their corresponding income and expense"},{text: JSON.stringify(DayWiseData)},],
             },
             {
                 role: "user",
@@ -81,16 +85,23 @@ let count = 0;
 
 const ChatBotResponse = async (req, res) => {
     try{
-        const {userInput,userInfo, CategoryWiseExpense,DayWiseData} = req.body;
-        let context = JSON.stringify(userInfo,CategoryWiseExpense,DayWiseData);
-        // context = context + "hello"
-        console.log(context)
-        const response = await runChat(userInput,historyy,userInfo,CategoryWiseExpense,DayWiseData);
-        console.log("runchat invoked")
-        count++;
-        historyy = historyy + `${count}`+ ":" + "Question: "+  userInput + ". response: "+ response;
-        console.log(historyy)
-        return res.status(200).send(response);
+        const {userInput,userInfo, CategoryWiseExpense,DayWiseData,end} = req.body;
+        if(end==="yes"){
+            historyy = "this is the history of all the previous questions ans answers asked till now if"+
+                "if the user asks any follow-up questions use this chat history as context to answer that follow-up question:"
+            count = 0;
+        }else{
+            let context = JSON.stringify(userInfo);
+            // context = context + "hello"
+            console.log(context)
+            const response = await runChat(userInput,historyy,userInfo,CategoryWiseExpense,DayWiseData);
+            console.log("runchat invoked")
+            count++;
+            historyy = historyy + `${count}`+ ":" + "Question: "+  userInput + ". response: "+ response;
+            console.log(historyy)
+            return res.status(200).send(response);
+        }
+
 
 
     }catch(err){

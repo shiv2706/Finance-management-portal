@@ -130,7 +130,7 @@ const getAllTransactions = async (req, res) => {
         const {selectedDate , answer,categoryy,type} = req.body;
         if(answer === "0" ) {
             const transactions = await transactionModel.find({userid: req.body.userid,})
-            console.log(transactions)
+            // console.log(transactions)
             return res.status(200).json(transactions);
         }else if(answer === "1" && selectedDate[0] === 0 && selectedDate[1] === 0){
             const transactions = await transactionModel.find({userid:req.body.userid,})
@@ -176,12 +176,15 @@ const getTotalDetail = async (req, res) => {
                 }
             }
         ]);
-        const transactions = await transactionModel.find({
+
+        const THESE_ARE_THE_TRANSACTIONS_ = await transactionModel.find({
             date:{
                 $gte: DaysAgo,
-
             },
-            userid:req.body.userid,})
+            userid:req.body.userid,
+        }).select('amount Type category date -_id')
+
+
 
         let totalIncome = 0;
         let totalExpense = 0;
@@ -201,7 +204,7 @@ const getTotalDetail = async (req, res) => {
         const balance = totalIncome - totalExpense;
         const totalTransactions = incomeTransactions + expenseTransactions;
 
-        return res.json({ transactions, totalIncome, totalExpense, balance, expenseTransactions,incomeTransactions,totalTransactions });
+        return res.json({ THESE_ARE_THE_TRANSACTIONS_, totalIncome, totalExpense, balance, expenseTransactions,incomeTransactions,totalTransactions });
 
     }catch(err){
         console.log(err)
