@@ -235,11 +235,22 @@ const addTransactionImage = async (req, res) => {
         const { data: { text } } = await Tesseract.recognize(imagePath);
         console.log("Extracted Text:", text);
         console.log("calling runchat");
-        const response = await runChat(text);
-        console.log(response);
+        // const response = await runChat(text);
+        // console.log(response);
 
+        return res.status(200).json(text);
+
+    }catch(err){
+        return res.status(500).json({err})
+    }
+}
+
+const CategorizeTransaction = async (req, res) => {
+    try{
+        const {transactData} = req.body;
+        const response = await runChat(transactData)
+        console.log(response)
         return res.status(200).json(response);
-
     }catch(err){
         return res.status(500).json({err})
     }
@@ -374,4 +385,4 @@ const getCategoryData = async (req, res) => {
 
 
 
-module.exports = {getAllTransactions, addTransaction, addTransactionImage,getTotalDetail,getLineChart, getCategoryData, addTransactionText, editTransaction, deleteTransaction}
+module.exports = {getAllTransactions, addTransaction, addTransactionImage,getTotalDetail,getLineChart, getCategoryData, addTransactionText, editTransaction, deleteTransaction, CategorizeTransaction}
