@@ -127,9 +127,12 @@ async function runChat(textInput) {
 
 const getAllTransactions = async (req, res) => {
     try{
-        const {selectedDate , answer,categoryy,type} = req.body;
+        const {selectedDate , answer,categoryy,type, daterange} = req.body;
+        const endDate = new Date(); // Today
+        const startDate = new Date();
+        startDate.setDate(endDate.getDate() - daterange); // Subtract days based on date range
         if(answer === "0" ) {
-            const transactions = await transactionModel.find({userid: req.body.userid,})
+            const transactions = await transactionModel.find({userid: req.body.userid,date: { $gte: startDate}})
             // console.log(transactions)
             return res.status(200).json(transactions);
         }else if(answer === "1" && selectedDate[0] === 0 && selectedDate[1] === 0){
@@ -137,20 +140,21 @@ const getAllTransactions = async (req, res) => {
             return res.status(200).json(transactions);
 
         }else if(answer=== "2"){
-            const transactions = await transactionModel.find({userid:req.body.userid, category:categoryy})
+            const transactions = await transactionModel.find({userid:req.body.userid, category:categoryy, date: { $gte: startDate}})
             return res.status(200).json(transactions);
         }else if(answer=== "3"){
-            const transactions = await transactionModel.find({userid:req.body.userid, Type:type})
-            return res.status(200).json(transactions);
-        }else{
-            const transactions = await transactionModel.find({
-                date:{
-                    $gte: selectedDate[0],
-                    $lte: selectedDate[1],
-                },
-                userid:req.body.userid,})
+            const transactions = await transactionModel.find({userid:req.body.userid, Type:type, date: { $gte: startDate}})
             return res.status(200).json(transactions);
         }
+        // else{
+        //     const transactions = await transactionModel.find({
+        //         date:{
+        //             $gte: selectedDate[0],
+        //             $lte: selectedDate[1],
+        //         },
+        //         userid:req.body.userid,})
+        //     return res.status(200).json(transactions);
+        // }
 
     }catch(err){
         console.log(err);
