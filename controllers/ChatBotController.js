@@ -2,7 +2,7 @@ const { GoogleGenerativeAI, HarmCategory, HarmBlockThreshold } = require('@googl
 const dotenv = require('dotenv').config()
 
 
-const MODEL_NAME = "gemini-1.5-flash-8b";
+const MODEL_NAME = "gemini-2.0-flash";
 const API_KEY = process.env.API_KEY;
 
 async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseData) {
@@ -35,7 +35,10 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
                         "or income or any other related finance data. you only answer finance related"+
                         "questions and friendly tell people that you can not answer any other"+
                         " kind of question other than personal finance politely and"+
-                        "all values are in rupees and there is no transaction in any other currency like dollar etc."}],
+                        "all values are in rupees and there is no transaction in any other currency like dollar etc."+
+                        "instead of saying 'based on provided data' use phrases that make use feel you have direct access to the users"+
+                        "financial data from the database for better user experience.And always translate dates to text form instead of yyyy-mm-dd"+
+                        "while using them in your response. eg 2025-01-5 is 5th january 2025"}],
             },
             {
                 role: "model",
@@ -79,29 +82,21 @@ async function runChat(userInput,memory,userDetails,CategoryWiseExpense,DayWiseD
     const response = result.response;
     return response.text();
 }
-// let historyy = "this is the history of all the previous questions ans answers asked till now if"+
-//     "if the user asks any follow-up questions use this chat history as context to answer that follow-up question:";
-// let count = 0;
+
 
 const ChatBotResponse = async (req, res) => {
     try{
         const {userInput,userInfo, CategoryWiseExpense,DayWiseData,Historyy} = req.body;
         console.log(Historyy)
-        // if(end==="yes"){
-        //     historyy = "this is the history of all the previous questions ans answers asked till now if"+
-        //         "if the user asks any follow-up questions use this chat history as context to answer that follow-up question:"
-        //     count = 0;
-        // }else{
+
         let context = JSON.stringify(userInfo);
-            // context = context + "hello"
+
         console.log(context)
         const response = await runChat(userInput,Historyy,userInfo,CategoryWiseExpense,DayWiseData);
         console.log("runchat invoked")
-            // count++;
-            // historyy = historyy + `${count}`+ ":" + "Question: "+  userInput + ". response: "+ response;
-            // console.log(historyy)
+
         return res.status(200).send(response);
-        // }
+
 
 
 

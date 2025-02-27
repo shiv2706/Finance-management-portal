@@ -5,7 +5,7 @@ const {json} = require("express");
 const dotenv = require('dotenv').config()
 
 
-const MODEL_NAME = "gemini-pro";
+const MODEL_NAME = "gemini-2.0-flash";
 const API_KEY = process.env.API_KEY;
 
 async function runChat(textInput) {
@@ -101,7 +101,8 @@ async function runChat(textInput) {
                         "        type: String," +
                         "        required: true," +
                         "    }"+
-                        "give the response such that i can directly pass it in the database"+
+                        "give the response such that i can directly pass it in the database DONT GIVE JSON RESPONSE"+
+                        "only give a string with values enclosed inside curly braces i.e. {}"+
                         "be sure to keep in mind the format of the date field only give in this format eg:2025-01-28"+
                         "return a response like {amount:'xyz', category:'xyz', Type:'xyz', date:'YYYY-MM-DD'}"+
                         "the categories should be any of the following only"+
