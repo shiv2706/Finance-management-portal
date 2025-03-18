@@ -111,7 +111,7 @@ async function runChat(textInput) {
                         "RENT\n" +
                         "FOOD\n" +
                         "EDUCATION\n" +
-                        "TRANSPORTATION\n" +
+                        "TRANSPORT\n" +
                         "SHOPPING\n" +
                         "ENTERTAINMENT\n"+
                         "GROCERIES\n"+
