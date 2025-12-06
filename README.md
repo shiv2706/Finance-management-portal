@@ -28,7 +28,8 @@ It also supports **PDF/image bank statement extraction**, automated categorizati
 ### 🧠 Document Parsing & Auto-Categorization
 - Upload **PDF or image bank statements**  
 - Extract transactions using **regex patterns**  
-- Automatically categorize entries using Gemini  
+- Automatically categorize entries using Gemini
+- Input transactions using natural language queries aswell
 - Reduces manual work & improves accuracy
 
 ### 🔐 Authentication & Security
@@ -62,7 +63,4 @@ It also supports **PDF/image bank statement extraction**, automated categorizati
 ### Visualization
 - Chart.js / React Chart libraries  
 
----
-
-## 📁 Project Structure
 
