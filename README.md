@@ -34,7 +34,6 @@ It also supports **PDF/image bank statement extraction**, automated categorizati
 ### 🔐 Authentication & Security
 - Secure login/signup  
 - Password hashing  
-- JWT-based session management  
 
 ### 📱 Modern UI
 - React + CSS  
@@ -53,16 +52,12 @@ It also supports **PDF/image bank statement extraction**, automated categorizati
 ### Backend
 - Node.js  
 - Express.js  
-- MongoDB + Mongoose  
-- JWT Authentication  
-- Bcryptjs  
+- MongoDB + Mongoose
+- Tesseract.js for OCR
 - Multer for file uploads  
 
 ### AI & RAG
-- Gemini API  
-- LangChain  
-- Embeddings-based retrieval  
-- Regex-based extraction  
+- Gemini API   
 
 ### Visualization
 - Chart.js / React Chart libraries  
