@@ -5,7 +5,7 @@ const {json} = require("express");
 const dotenv = require('dotenv').config()
 
 
-const MODEL_NAME = "gemini-2.0-flash";
+const MODEL_NAME = "gemini-2.5-flash";
 const API_KEY = process.env.API_KEY;
 
 async function runChat(textInput) {
